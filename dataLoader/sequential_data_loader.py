@@ -3,7 +3,7 @@ from torch.utils.data import Dataset
 import os
 import pandas as pd
 from sequential_data_generation_book import book_preprocessor
-from sequantial_data_generation_trade import trade_preprocessor
+from sequential_data_generation_trade import trade_preprocessor
 from joblib import Parallel, delayed
 
 data_dir = '../optiver-realized-volatility-prediction/'
@@ -25,10 +25,10 @@ def preprocessor():
 
 
     train = pd.read_csv('../optiver-realized-volatility-prediction/train.csv')
-    Parallel(n_jobs=-1, verbose=1)(delayed(for_joblib)(stock_id) for stock_id in train['stock_id'])
+    Parallel(n_jobs=-1, verbose=1)(delayed(for_joblib)(stock_id) for stock_id in set(train['stock_id']))
     return
 
-# preprocessor()
+preprocessor()
 
 
 # class BookAndTradeLoader(Dataset):
